@@ -27,5 +27,16 @@ class ShoperyDoctrineTypeExtension extends Extension implements PrependExtension
 
     public function prepend(ContainerBuilder $container)
     {
+        $config = $this->getBundleConfiguration($container);
+    }
+
+    private function getBundleConfiguration(ContainerBuilder $container)
+    {
+        $configs = $container->getExtensionConfig(self::ALIAS);
+
+        $configuration = new Configuration(self::ALIAS);
+        $config = $this->processConfiguration($configuration, $configs);
+
+        return $container->getParameterBag()->resolveValue($config);
     }
 }

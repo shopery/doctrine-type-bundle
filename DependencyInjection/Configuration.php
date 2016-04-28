@@ -31,6 +31,54 @@ class Configuration implements ConfigurationInterface
 
         $root = $builder->root($this->alias);
 
+        $root
+            ->children()
+                ->arrayNode('paths')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('path')
+                                ->isRequired()
+                            ->end()
+                            ->scalarNode('match')->end()
+                            ->scalarNode('suffix')->end()
+                        ->end()
+
+                        ->beforeNormalization()
+                            ->ifString()
+                            ->then(function ($v) {
+                                return [
+                                    'path' => $v,
+                                ];
+                            })
+                        ->end()
+
+                        ->validate()
+                            ->ifTrue(function ($v) {
+                                return !isset($v['suffix']);
+                            })
+                            ->then(function ($v) {
+                                $v['suffix'] = 'OrmType';
+
+                                return $v;
+                            })
+                        ->end()
+
+                        ->validate()
+                            ->ifTrue(function ($v) {
+                                return !isset($v['match']);
+                            })
+                            ->then(function ($v) {
+                                $v['match'] = '*' . $v['suffix'] . '.php';
+
+                                return $v;
+                            })
+                        ->end()
+
+                    ->end()
+                ->end()
+            ->end()
+        ->end();
+
         return $builder;
     }
 }

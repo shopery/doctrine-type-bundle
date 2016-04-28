@@ -1,0 +1,23 @@
+{
+    "name": "shopery/doctrine-type-bundle",
+    "description": "Automatic discovery of Doctrine types in your symfony application",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Berny Cantos",
+            "email": "be@rny.cc"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shopery\\Bundle\\DoctrineTypeBundle\\": "."
+        }
+    },
+    "require": {
+        "symfony/config": ">=2.3",
+        "symfony/dependency-injection": ">=2.3",
+        "symfony/http-foundation": ">=2.3",
+        "symfony/http-kernel": ">=2.3"
+    }
+}

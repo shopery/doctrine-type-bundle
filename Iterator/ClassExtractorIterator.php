@@ -26,7 +26,7 @@ class ClassExtractorIterator implements \IteratorAggregate
         }
     }
 
-    private function extractClasses(string $filename)
+    private function extractClasses($filename)
     {
         $state = false;
         $namespace = '';

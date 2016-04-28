@@ -15,7 +15,7 @@ class DoctrineTypeIterator implements \IteratorAggregate
     private $innerIterator;
     private $suffix;
 
-    public function __construct(Traversable $iterator, string $suffix)
+    public function __construct(Traversable $iterator, $suffix)
     {
         $this->innerIterator = $iterator;
         $this->suffix = $suffix;
@@ -30,7 +30,7 @@ class DoctrineTypeIterator implements \IteratorAggregate
         }
     }
 
-    private function getTypeName(string $fullClassName)
+    private function getTypeName($fullClassName)
     {
         $suffixLength = strlen($this->suffix);
         if (substr_compare($fullClassName, $this->suffix, -$suffixLength, $suffixLength) !== 0) {
